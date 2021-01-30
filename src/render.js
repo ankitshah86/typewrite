@@ -49,6 +49,7 @@ clearButton.addEventListener("click", clear)
  */
 var init = function (ctx) {
 
+    ctx.translate(0.5,0.5)
     //draw grid lines
     ctx.strokeStyle = "rgb(200,200,250)";
     ctx.lineWidth = 2
