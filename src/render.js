@@ -13,7 +13,36 @@ var getCtx2d = function(canvas) {
     return canvas.getContext("2d")
 }
 
+/**
+ * 
+ * @returns {HTMLButtonElement} 
+ */
+var getClearButton = function() {
+    return document.getElementById("clear")
+}
+
+var clear = function () {
+     ctx.clearRect(0,0,200,200)
+     ctx.strokeStyle = "rgb(200,200,250)";
+     ctx.lineWidth = 2
+     ctx.moveTo(0,50)
+     ctx.lineTo(200,50)
+     ctx.moveTo(0,150)
+     ctx.lineTo(200,150)
+     ctx.stroke()
+     
+     ctx.strokeStyle = "blue"
+     ctx.lineWidth = 3;
+}
+
+
 var ctx = getCtx2d(drawingboard)
+var clearButton = getClearButton()
+
+clearButton.addEventListener("click", clear)
+
+
+
 /**
  * 
  * @param {CanvasRenderingContext2D} ctx 
@@ -29,8 +58,6 @@ var init = function (ctx) {
     ctx.lineTo(200,150)
     ctx.stroke()
 
-    ctx.fillStyle = "orange"
-    ctx.fillStyle = 'rgb(255, 165, 35)';
     ctx.strokeStyle = "blue"
     ctx.lineWidth = 3;
 
