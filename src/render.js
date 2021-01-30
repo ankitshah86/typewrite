@@ -1,10 +1,19 @@
 var drawingboard = document.getElementById("drawingboard")
 drawingboard.width = 300
 drawingboard.height = 300
-var ctx = drawingboard.getContext("2d")
 var pathBegin
 var prevX, prevY
 
+/**
+ * 
+ * @param {HTMLCanvasElement} canvas 
+ * @returns {CanvasRenderingContext2D}
+ */
+var getCtx2d = function(canvas) {
+    return canvas.getContext("2d")
+}
+
+var ctx = getCtx2d(drawingboard)
 /**
  * 
  * @param {CanvasRenderingContext2D} ctx 
@@ -25,7 +34,6 @@ drawingboard.addEventListener(('mousemove'), function (ev) {
     let y = ev.pageY - drawingboard.offsetTop
 
     if (ev.ctrlKey || ev.buttons  == 1) {
-
         ctx.beginPath();
         ctx.moveTo(prevX, prevY);
         ctx.lineTo(x, y);
