@@ -1,6 +1,6 @@
 var drawingboard = document.getElementById("drawingboard")
-drawingboard.width = 300
-drawingboard.height = 300
+drawingboard.width = 200
+drawingboard.height = 200
 var pathBegin
 var prevX, prevY
 
@@ -20,10 +20,20 @@ var ctx = getCtx2d(drawingboard)
  */
 var init = function (ctx) {
 
+    //draw grid lines
+    ctx.strokeStyle = "rgb(200,200,250)";
+    ctx.lineWidth = 2
+    ctx.moveTo(0,50)
+    ctx.lineTo(200,50)
+    ctx.moveTo(0,150)
+    ctx.lineTo(200,150)
+    ctx.stroke()
+
     ctx.fillStyle = "orange"
     ctx.fillStyle = 'rgb(255, 165, 35)';
     ctx.strokeStyle = "blue"
     ctx.lineWidth = 3;
+
     pathBegin = false
 }
 
