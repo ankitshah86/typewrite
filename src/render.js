@@ -4,6 +4,8 @@ drawingboard.height = 200
 var pathBegin
 var prevX, prevY
 
+var pathVec = []
+
 /**
  * 
  * @param {HTMLCanvasElement} canvas 
@@ -28,6 +30,7 @@ var clear = function () {
     ctx.moveTo(0, 50)
     ctx.lineTo(200, 50)
     ctx.moveTo(0, 150)
+
     ctx.lineTo(200, 150)
     ctx.stroke()
 
@@ -86,6 +89,7 @@ drawingboard.addEventListener(('mousemove'), function (ev) {
         ctx.beginPath();
         ctx.moveTo(prevX, prevY);
         ctx.lineTo(x, y);
+        pathVec.push({ x, y })
         ctx.stroke();
         ctx.closePath();
     }
@@ -94,4 +98,8 @@ drawingboard.addEventListener(('mousemove'), function (ev) {
 
 
     //console.log({ x: ev.x, y: ev.y })
+})
+
+drawingboard.addEventListener(("mouseup"), (ev) => {
+    console.log(pathVec)
 })
