@@ -19,12 +19,12 @@ var getCtx2d = function (canvas) {
 /**
  * @returns {HTMLSelectElement}
  */
-var getFontSelector = function() {
+var getFontSelector = function () {
     return document.getElementById("fontSelector")
 }
 var fontSelector = getFontSelector()
 
-fontSelector.onchange = function() {
+fontSelector.onchange = function () {
     let idx = this[this.selectedIndex].text
     fontFamily = idx
     clear()
@@ -39,20 +39,13 @@ var getClearButton = function () {
 
 var clear = function () {
     ctx.clearRect(0, 0, 200, 200)
-    ctx.strokeStyle = "rgb(200,200,250)";
-    ctx.lineWidth = 1
-    ctx.moveTo(0, 50)
-    ctx.lineTo(200, 50)
-    ctx.moveTo(0, 150)
-
-    ctx.lineTo(200, 150)
-    ctx.stroke()
+    drawGuideLines()
 
 
     ctx.strokeStyle = "rgb(200,200,250)";
     //ctx.strokeStyle = "blue"
     ctx.lineWidth = 1;
-    ctx.font = "italic 200px "+fontFamily 
+    ctx.font = "italic 200px " + fontFamily
     ctx.textAlign = "center"
     ctx.textBaseline = "bottom"
     ctx.strokeText("a", 100, 198, 200)
@@ -75,10 +68,19 @@ clearButton.addEventListener("click", clear)
  */
 var init = function (ctx) {
 
-   
+
 
     ctx.translate(0.5, 0.5)
     //draw grid lines
+    drawGuideLines()
+    ctx.strokeStyle = "blue"
+    ctx.lineWidth = 3;
+
+    pathBegin = false
+    clear()
+}
+
+var drawGuideLines = function () {
     ctx.strokeStyle = "rgb(200,200,250)";
     ctx.lineWidth = 2
     ctx.moveTo(0, 50)
@@ -86,12 +88,6 @@ var init = function (ctx) {
     ctx.moveTo(0, 150)
     ctx.lineTo(200, 150)
     ctx.stroke()
-
-    ctx.strokeStyle = "blue"
-    ctx.lineWidth = 3;
-
-    pathBegin = false
-    clear()
 }
 
 init(ctx)
