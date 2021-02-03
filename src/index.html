@@ -1,22 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-    <link rel="stylesheet" href="index.css">
-    <script defer src="render.js"></script>
-  </head>
-  <body>
-    <h1>Type Writer</h1>
-    <p>Kindly draw the fonts as shown below.</p>
-     
-     <br>
-    <div style="width: 200px; height: 200px; ">
-    <canvas id="drawingboard" style="width: 200px; height: 200px; background-color: beige;">
-    </div>
-      <br>
-      <button id="clear">Clear</button> 
 
-    </canvas>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World!</title>
+  <link rel="stylesheet" href="index.css">
+  <script defer src="render.js"></script>
+</head>
+
+<body>
+  <h1>Type Writer</h1>
+  <p>Kindly draw the fonts as shown below.</p>
+  Select Font : <select id="fontSelector" style="margin: 20px 0px;">
+    <option>Times</option>
+    <option>Calibri</option>
+    <option>Arial</option>
+    <option>Verdana</option>
+    <option>Helvetica</option>
+    <option>Tahoma</option>
+    <option>Trebuchet MS</option>
+    <option>Times New Roman</option>
+    <option>Georgia</option>
+    <option>Garamond</option>
+    <option>Courier New</option>
+    <option>Brush Script MT</option>
+  </select>
+  <br>
+  <div style="width: 200px; height: 200px; ">
+    <canvas id="drawingboard" style="width: 200px; height: 200px; background-color: beige;">
+  </div>
+  <br>
+  <button id="clear">Clear</button>
+
+
+  </canvas>
+</body>
+
 </html>

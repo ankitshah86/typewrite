@@ -5,6 +5,7 @@ var pathBegin
 var prevX, prevY
 
 var pathVec = []
+var fontFamily = "Times New Roman"
 
 /**
  * 
@@ -15,6 +16,19 @@ var getCtx2d = function (canvas) {
     return canvas.getContext("2d")
 }
 
+/**
+ * @returns {HTMLSelectElement}
+ */
+var getFontSelector = function() {
+    return document.getElementById("fontSelector")
+}
+var fontSelector = getFontSelector()
+
+fontSelector.onchange = function() {
+    let idx = this[this.selectedIndex].text
+    fontFamily = idx
+    clear()
+}
 /**
  * 
  * @returns {HTMLButtonElement} 
@@ -38,10 +52,10 @@ var clear = function () {
     ctx.strokeStyle = "rgb(200,200,250)";
     //ctx.strokeStyle = "blue"
     ctx.lineWidth = 1;
-    ctx.font = "italic 200px calibri"
+    ctx.font = "italic 200px "+fontFamily 
     ctx.textAlign = "center"
     ctx.textBaseline = "bottom"
-    ctx.strokeText("gG", 100, 198, 200)
+    ctx.strokeText("a", 100, 198, 200)
 
     //ctx.imageSmoothingQuality = "high"
     //ctx.bezierCurveTo()
@@ -55,13 +69,13 @@ var clearButton = getClearButton()
 
 clearButton.addEventListener("click", clear)
 
-
-
 /**
  * 
  * @param {CanvasRenderingContext2D} ctx 
  */
 var init = function (ctx) {
+
+   
 
     ctx.translate(0.5, 0.5)
     //draw grid lines
@@ -77,6 +91,7 @@ var init = function (ctx) {
     ctx.lineWidth = 3;
 
     pathBegin = false
+    clear()
 }
 
 init(ctx)
@@ -101,5 +116,5 @@ drawingboard.addEventListener(('mousemove'), function (ev) {
 })
 
 drawingboard.addEventListener(("mouseup"), (ev) => {
-    console.log(pathVec)
+    //console.log(pathVec)
 })
