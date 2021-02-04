@@ -68,8 +68,6 @@ clearButton.addEventListener("click", clear)
  */
 var init = function (ctx) {
 
-
-
     ctx.translate(0.5, 0.5)
     //draw grid lines
     drawGuideLines()
@@ -92,10 +90,22 @@ var drawGuideLines = function () {
 
 init(ctx)
 
+
+drawingboard.addEventListener(("mousedown"),function(ev){
+    pathVec.push({event : "mousedown"})
+})
+
+drawingboard.addEventListener(("mouseup"), function(ev){
+    pathVec.push({event:"mouseup"})
+})
+
 drawingboard.addEventListener(('mousemove'), function (ev) {
     let x = ev.pageX - drawingboard.offsetLeft
     let y = ev.pageY - drawingboard.offsetTop
 
+
+
+    
     if (ev.ctrlKey || ev.buttons == 1) {
         ctx.beginPath();
         ctx.moveTo(prevX, prevY);
@@ -103,6 +113,7 @@ drawingboard.addEventListener(('mousemove'), function (ev) {
         pathVec.push({ x, y })
         ctx.stroke();
         ctx.closePath();
+        
     }
     prevX = x
     prevY = y
@@ -110,6 +121,8 @@ drawingboard.addEventListener(('mousemove'), function (ev) {
 
     //console.log({ x: ev.x, y: ev.y })
 })
+
+
 
 drawingboard.addEventListener(("mouseup"), (ev) => {
     //console.log(pathVec)
