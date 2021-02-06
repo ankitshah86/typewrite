@@ -37,6 +37,43 @@ var getClearButton = function () {
     return document.getElementById("clear")
 }
 
+/**
+ * 
+ * @returns {HTMLButtonElement} 
+ */
+var getSmoothButton = function () {
+    return document.getElementById("smoothing")
+}
+
+var applySmoothing = function () {
+
+    //apply running average for points
+    for (let i = 1; i < pathVec.length - 1; i++) {
+
+        if (pathVec[i].event || pathVec[i - 1].event || pathVec[i + 1].event) {
+            continue
+        } else {
+            pathVec[i] = {
+                x: (pathVec[i - 1].x + pathVec[i + 1].x) / 2,
+                y: (pathVec[i - 1].y + pathVec[i + 1].y) / 2
+            }
+            console.log(pathVec[i])
+        }
+    }
+
+    clear()
+
+    ctx.beginPath()
+    ctx.moveTo(pathVec[1].x, pathVec[1].y)
+
+    for (let i = 2; i < pathVec.length; i++) {
+        ctx.lineTo(pathVec[i].x, pathVec[i].y);
+        ctx.stroke();
+        ctx.moveTo(pathVec[i].x, pathVec[i].y)
+    }
+    ctx.closePath();
+}
+
 var clear = function () {
     ctx.clearRect(0, 0, 200, 200)
     drawGuideLines()
@@ -59,6 +96,8 @@ var clear = function () {
 
 var ctx = getCtx2d(drawingboard)
 var clearButton = getClearButton()
+var smoothButton = getSmoothButton()
+smoothButton.addEventListener("click", applySmoothing)
 
 clearButton.addEventListener("click", clear)
 
@@ -91,12 +130,12 @@ var drawGuideLines = function () {
 init(ctx)
 
 
-drawingboard.addEventListener(("mousedown"),function(ev){
-    pathVec.push({event : "mousedown"})
+drawingboard.addEventListener(("mousedown"), function (ev) {
+    pathVec.push({ event: "mousedown" })
 })
 
-drawingboard.addEventListener(("mouseup"), function(ev){
-    pathVec.push({event:"mouseup"})
+drawingboard.addEventListener(("mouseup"), function (ev) {
+    pathVec.push({ event: "mouseup" })
 })
 
 drawingboard.addEventListener(('mousemove'), function (ev) {
@@ -105,7 +144,6 @@ drawingboard.addEventListener(('mousemove'), function (ev) {
 
 
 
-    
     if (ev.ctrlKey || ev.buttons == 1) {
         ctx.beginPath();
         ctx.moveTo(prevX, prevY);
@@ -113,7 +151,6 @@ drawingboard.addEventListener(('mousemove'), function (ev) {
         pathVec.push({ x, y })
         ctx.stroke();
         ctx.closePath();
-        
     }
     prevX = x
     prevY = y
