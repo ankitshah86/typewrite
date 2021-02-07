@@ -45,39 +45,61 @@ var getSmoothButton = function () {
     return document.getElementById("smoothing")
 }
 
+var drawPath = function () {
+
+
+    pathVec.forEach((p, i) => {
+        if (p.event) {
+            if (p.event == "mousedown") {
+                ctx.beginPath()
+                ctx.moveTo(pathVec[i+1].x,pathVec[i+1].y)
+            } else if (p.event == "mouseup") {
+
+            }
+        } else {
+            ctx.lineTo(p.x,p.y)
+            ctx.stroke()
+        }
+    })
+
+    ctx.closePath()
+
+}
+
 var applySmoothing = function () {
+    clear()
+    let smoothVec = []
+
 
     //apply running average for points
-    for (let i = 1; i < pathVec.length - 1; i++) {
+    for (let i = 0; i < pathVec.length; i++) {
 
-        if (pathVec[i].event || pathVec[i - 1].event || pathVec[i + 1].event) {
-            continue
-        } else {
-            pathVec[i] = {
-                x: (pathVec[i - 1].x + pathVec[i + 1].x) / 2,
-                y: (pathVec[i - 1].y + pathVec[i + 1].y) / 2
+        let p = pathVec[i]
+        smoothVec.push(p)
+
+        if (p.event) {
+            if (p.event == "mousedown") {
+                ctx.beginPath()
+                ctx.moveTo(pathVec[i + 1].x, pathVec[i + 1].y)
+            } else if (p.event == "mouseup") {
+                ctx.closePath()
             }
-            console.log(pathVec[i])
+            continue
+        } else if (i > 0 && i < pathVec.length - 1 && !pathVec[i - 1].event && !pathVec[i + 1].event) {
+            smoothVec[i] = {
+                x: (smoothVec[i - 1].x + pathVec[i + 1].x) / 2,
+                y: (smoothVec[i - 1].y + pathVec[i + 1].y) / 2
+            }
         }
     }
 
-    clear()
-
-    ctx.beginPath()
-    ctx.moveTo(pathVec[1].x, pathVec[1].y)
-
-    for (let i = 2; i < pathVec.length; i++) {
-        ctx.lineTo(pathVec[i].x, pathVec[i].y);
-        ctx.stroke();
-        ctx.moveTo(pathVec[i].x, pathVec[i].y)
-    }
-    ctx.closePath();
+    pathVec = smoothVec
+    drawPath()
 }
 
 var clear = function () {
     ctx.clearRect(0, 0, 200, 200)
     drawGuideLines()
-
 
     ctx.strokeStyle = "rgb(200,200,250)";
     //ctx.strokeStyle = "blue"
