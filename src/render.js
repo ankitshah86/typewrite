@@ -98,6 +98,7 @@ var applySmoothing = function () {
 }
 
 var clear = function () {
+
     ctx.clearRect(0, 0, 200, 200)
     drawGuideLines()
 
@@ -112,7 +113,7 @@ var clear = function () {
     //ctx.imageSmoothingQuality = "high"
     //ctx.bezierCurveTo()
     ctx.strokeStyle = "blue"
-    ctx.lineWidth = 3
+    ctx.lineWidth = 2
 }
 
 
@@ -133,7 +134,7 @@ var init = function (ctx) {
     //draw grid lines
     drawGuideLines()
     ctx.strokeStyle = "blue"
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 2;
 
     pathBegin = false
     clear()
