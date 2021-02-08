@@ -99,6 +99,7 @@ var applySmoothing = function () {
 
 var clear = function () {
 
+    ctx.canvas.width = ctx.canvas.width
     ctx.clearRect(0, 0, 200, 200)
     drawGuideLines()
 
@@ -143,6 +144,8 @@ var init = function (ctx) {
 var drawGuideLines = function () {
     ctx.strokeStyle = "rgb(200,200,250)";
     ctx.lineWidth = 2
+    
+    ctx.closePath()
     ctx.moveTo(0, 50)
     ctx.lineTo(200, 50)
     ctx.moveTo(0, 150)
