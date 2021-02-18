@@ -1,3 +1,5 @@
+const {Path,Point} = require("./models")
+
 var drawingboard = document.getElementById("drawingboard")
 drawingboard.width = 200
 drawingboard.height = 200
@@ -6,6 +8,7 @@ var prevX, prevY
 
 var pathVec = []
 var fontFamily = "Times New Roman"
+var path = new Path()
 
 /**
  * 
@@ -158,10 +161,12 @@ init(ctx)
 
 drawingboard.addEventListener(("mousedown"), function (ev) {
     pathVec.push({ event: "mousedown" })
+    path.addEvent("mousedown")
 })
 
 drawingboard.addEventListener(("mouseup"), function (ev) {
     pathVec.push({ event: "mouseup" })
+    path.addEvent("mouseup")
 })
 
 drawingboard.addEventListener(('mousemove'), function (ev) {
@@ -171,6 +176,7 @@ drawingboard.addEventListener(('mousemove'), function (ev) {
 
 
     if (ev.ctrlKey || ev.buttons == 1) {
+        path.addPoint(x,y)
         ctx.beginPath();
         ctx.moveTo(prevX, prevY);
         ctx.lineTo(x, y);
