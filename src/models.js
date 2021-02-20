@@ -42,6 +42,34 @@ class Path {
     addEvent(event) {
         this.points.push(new Point(null,null,event))
     }
+
+    /**
+     * 
+     * @param {CanvasRenderingContext2D} ctx
+     * @param {String} color 
+     * @param {Number} width 
+     */
+    drawPath(ctx,color,width) {
+
+        ctx.strokeStyle = color
+        ctx.lineWidth = width
+
+        this.points.forEach((p, i) => {
+            if (p.event) {
+                if (p.event == "mousedown") {
+                    ctx.beginPath()
+                    ctx.moveTo(pathVec[i+1].x,pathVec[i+1].y)
+                } else if (p.event == "mouseup") {
+    
+                }
+            } else {
+                ctx.lineTo(p.x,p.y)
+                ctx.stroke()
+            }
+        })
+    
+        ctx.closePath()
+    }
 }
 
 exports.Path = Path

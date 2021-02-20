@@ -49,24 +49,7 @@ var getSmoothButton = function () {
 }
 
 var drawPath = function () {
-
-
-    pathVec.forEach((p, i) => {
-        if (p.event) {
-            if (p.event == "mousedown") {
-                ctx.beginPath()
-                ctx.moveTo(pathVec[i+1].x,pathVec[i+1].y)
-            } else if (p.event == "mouseup") {
-
-            }
-        } else {
-            ctx.lineTo(p.x,p.y)
-            ctx.stroke()
-        }
-    })
-
-    ctx.closePath()
-
+    path.drawPath(ctx,"blue",3)
 }
 
 var applySmoothing = function () {
@@ -102,6 +85,7 @@ var applySmoothing = function () {
 
 var clear = function () {
 
+    path.clear()
     ctx.canvas.width = ctx.canvas.width
     ctx.clearRect(0, 0, 200, 200)
     drawGuideLines()
