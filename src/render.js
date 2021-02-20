@@ -49,38 +49,28 @@ var getSmoothButton = function () {
 }
 
 var drawPath = function () {
-    path.drawPath(ctx,"blue",3)
+    path.drawPath(ctx)
 }
 
 var applySmoothing = function () {
-    clear()
-    let smoothVec = []
-
-
-    //apply running average for points
-    for (let i = 0; i < pathVec.length; i++) {
-
-        let p = pathVec[i]
-        smoothVec.push(p)
-
-        if (p.event) {
-            if (p.event == "mousedown") {
-                ctx.beginPath()
-                ctx.moveTo(pathVec[i + 1].x, pathVec[i + 1].y)
-            } else if (p.event == "mouseup") {
-                ctx.closePath()
-            }
-            continue
-        } else if (i > 0 && i < pathVec.length - 1 && !pathVec[i - 1].event && !pathVec[i + 1].event) {
-            smoothVec[i] = {
-                x: (smoothVec[i - 1].x + pathVec[i + 1].x) / 2,
-                y: (smoothVec[i - 1].y + pathVec[i + 1].y) / 2
-            }
-        }
-    }
-
-    pathVec = smoothVec
+    clearBoard()
+    path.applySmoothing(ctx)
     drawPath()
+}
+
+var clearBoard = function() {
+    ctx.canvas.width = ctx.canvas.width
+    ctx.clearRect(0, 0, 200, 200)
+    drawGuideLines()
+
+    ctx.strokeStyle = "rgb(200,200,250)";
+    ctx.lineWidth = 1;
+    ctx.font = "italic 200px " + fontFamily
+    ctx.textAlign = "center"
+    ctx.textBaseline = "bottom"
+    ctx.strokeText("a", 100, 198, 200)
+    ctx.strokeStyle = "blue"
+    ctx.lineWidth = 2
 }
 
 var clear = function () {
