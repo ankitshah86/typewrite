@@ -39,8 +39,15 @@ var getCanvas = function() {
     return document.getElementById("drawingboard")
 }
 
-exports.getSmoothButton = getSmoothButton 
-exports.getClearButton = getClearButton
-exports.getFontSelector = getFontSelector
-exports.getCtx2d = getCtx2d
-exports.getCanvas = getCanvas
+
+var drawingboard = getCanvas()
+var ctx = getCtx2d(drawingboard)
+var clearButton = getClearButton()
+var smoothButton = getSmoothButton()
+var fontSelector = getFontSelector()
+
+exports.drawingboard = drawingboard
+exports.ctx = ctx
+exports.clearButton = clearButton
+exports.smoothButton = smoothButton
+exports.fontSelector = fontSelector

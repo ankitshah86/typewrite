@@ -1,12 +1,5 @@
-const { getFontSelector, getCtx2d, getClearButton, getSmoothButton, getCanvas } = require("./elements")
-const {Path,Point} = require("./models")
-
-
-var drawingboard = getCanvas()
-var ctx = getCtx2d(drawingboard)
-var clearButton = getClearButton()
-var smoothButton = getSmoothButton()
-var fontSelector = getFontSelector()
+const {drawingboard,ctx,clearButton,smoothButton,fontSelector} = require("./elements")
+const {Path } = require("./models")
 
 drawingboard.width = 200
 drawingboard.height = 200
