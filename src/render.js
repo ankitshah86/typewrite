@@ -1,6 +1,13 @@
+const { getFontSelector, getCtx2d, getClearButton, getSmoothButton, getCanvas } = require("./elements")
 const {Path,Point} = require("./models")
 
-var drawingboard = document.getElementById("drawingboard")
+
+var drawingboard = getCanvas()
+var ctx = getCtx2d(drawingboard)
+var clearButton = getClearButton()
+var smoothButton = getSmoothButton()
+var fontSelector = getFontSelector()
+
 drawingboard.width = 200
 drawingboard.height = 200
 var pathBegin
@@ -10,42 +17,10 @@ var pathVec = []
 var fontFamily = "Times New Roman"
 var path = new Path()
 
-/**
- * 
- * @param {HTMLCanvasElement} canvas 
- * @returns {CanvasRenderingContext2D}
- */
-var getCtx2d = function (canvas) {
-    return canvas.getContext("2d")
-}
-
-/**
- * @returns {HTMLSelectElement}
- */
-var getFontSelector = function () {
-    return document.getElementById("fontSelector")
-}
-var fontSelector = getFontSelector()
-
 fontSelector.onchange = function () {
     let idx = this[this.selectedIndex].text
     fontFamily = idx
     clear()
-}
-/**
- * 
- * @returns {HTMLButtonElement} 
- */
-var getClearButton = function () {
-    return document.getElementById("clear")
-}
-
-/**
- * 
- * @returns {HTMLButtonElement} 
- */
-var getSmoothButton = function () {
-    return document.getElementById("smoothing")
 }
 
 var drawPath = function () {
@@ -74,7 +49,7 @@ var clearBoard = function() {
 }
 
 var clear = function () {
-
+    console.log("lskdjflskjf")
     path.clear()
     ctx.canvas.width = ctx.canvas.width
     ctx.clearRect(0, 0, 200, 200)
@@ -94,10 +69,6 @@ var clear = function () {
     ctx.lineWidth = 2
 }
 
-
-var ctx = getCtx2d(drawingboard)
-var clearButton = getClearButton()
-var smoothButton = getSmoothButton()
 smoothButton.addEventListener("click", applySmoothing)
 
 clearButton.addEventListener("click", clear)
