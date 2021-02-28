@@ -51,6 +51,8 @@ class Path {
      */
     drawPath(ctx,color = ctx.strokeStyle,width = ctx.lineWidth) {
 
+        
+
         ctx.strokeStyle = color
         ctx.lineWidth = width
         
@@ -63,7 +65,7 @@ class Path {
                     ctx.beginPath()
                     
                 } else if (p.event == "mouseup") {
-            
+                    
                 }
             } else {
                 ctx.lineTo(p.x,p.y)

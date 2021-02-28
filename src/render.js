@@ -85,8 +85,7 @@ var init = function (ctx) {
 var drawGuideLines = function () {
     ctx.strokeStyle = "rgb(200,200,250)";
     ctx.lineWidth = 2
-    
-    ctx.closePath()
+    ctx.beginPath()
     ctx.moveTo(0, 50)
     ctx.lineTo(200, 50)
     ctx.moveTo(0, 150)
@@ -95,7 +94,6 @@ var drawGuideLines = function () {
 }
 
 init(ctx)
-
 
 drawingboard.addEventListener(("mousedown"), function (ev) {
     pathVec.push({ event: "mousedown" })
@@ -108,12 +106,13 @@ drawingboard.addEventListener(("mouseup"), function (ev) {
 })
 
 drawingboard.addEventListener(('mousemove'), function (ev) {
+
     let x = ev.pageX - drawingboard.offsetLeft
     let y = ev.pageY - drawingboard.offsetTop
 
 
 
-    if (ev.ctrlKey || ev.buttons == 1) {
+    if (ev.buttons == 1) {
         path.addPoint(x,y)
         ctx.beginPath();
         ctx.moveTo(prevX, prevY);
