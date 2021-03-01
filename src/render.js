@@ -96,12 +96,12 @@ var drawGuideLines = function () {
 init(ctx)
 
 drawingboard.addEventListener(("mousedown"), function (ev) {
-    pathVec.push({ event: "mousedown" })
+   // pathVec.push({ event: "mousedown" })
     path.addEvent("mousedown")
 })
 
 drawingboard.addEventListener(("mouseup"), function (ev) {
-    pathVec.push({ event: "mouseup" })
+    //pathVec.push({ event: "mouseup" })
     path.addEvent("mouseup")
 })
 
@@ -117,19 +117,12 @@ drawingboard.addEventListener(('mousemove'), function (ev) {
         ctx.beginPath();
         ctx.moveTo(prevX, prevY);
         ctx.lineTo(x, y);
-        pathVec.push({ x, y })
+       // pathVec.push({ x, y })
+        path.addPoint(x,y)
         ctx.stroke();
         ctx.closePath();
     }
     prevX = x
     prevY = y
-
-
-    //console.log({ x: ev.x, y: ev.y })
-})
-
-
-
-drawingboard.addEventListener(("mouseup"), (ev) => {
-    //console.log(pathVec)
+    
 })
